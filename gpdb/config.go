@@ -17,6 +17,7 @@ var Config = struct {
 		GOBUILD         string `yaml:"GO_BUILD"`
 		BASEDIR         string `yaml:"BASE_DIR"`
 		TEMPDIR         string `yaml:"TEMP_DIR"`
+		DATALABS        bool   `yaml:"DATALABS"`
 	} `yaml:"CORE"`
 	DOWNLOAD struct {
 		APITOKEN    string `yaml:"API_TOKEN"`
@@ -24,6 +25,7 @@ var Config = struct {
 	} `yaml:"DOWNLOAD"`
 	INSTALL struct {
 		ENVDIR               string `yaml:"ENV_DIR"`
+		ENVSCRIPT            string `yaml:"ENV_SCRIPT"`
 		UNINTSALLDIR         string `yaml:"UNINTSALL_DIR"`
 		FUTUREREFDIR         string `yaml:"FUTUREREF_DIR"`
 		MASTERUSER           string `yaml:"MASTER_USER"`
@@ -33,6 +35,8 @@ var Config = struct {
 		SEGMENTDATADIRECTORY string `yaml:"SEGMENT_DATA_DIRECTORY"`
 		MIRRORDATADIRECTORY  string `yaml:"MIRROR_DATA_DIRECTORY"`
 		TOTALSEGMENT         int    `yaml:"TOTAL_SEGMENT"`
+		MAXINSTALLED         int    `yaml:"MAXINSTALLED"`
+		PGCONFDIRECTORY          string `yaml:"PGCONF_DIRECTORY"`
 	} `yaml:"INSTALL"`
 }{}
 
@@ -96,6 +100,11 @@ func validateConfiguration() {
 	Config.INSTALL.GPMONPASS = setDefaults(Config.INSTALL.GPMONPASS, "changeme", "GPMON_PASS")                                                       // Gpmon password
 	Config.INSTALL.MASTERUSER = setDefaults(Config.INSTALL.MASTERUSER, "gpadmin", "MASTER_USER")                                                     // Master userv
 	Config.INSTALL.TOTALSEGMENT = strToInt(setDefaults(strconv.Itoa(Config.INSTALL.TOTALSEGMENT), "2", "TOTAL_SEGMENT"))                             // Total Segments
+	
+	Config.CORE.DATALABS = strToBool(setDefaults(strconv.FormatBool(Config.CORE.DATALABS), "false", "DATALABS"))                                     // Is this Data Labs?
+	Config.INSTALL.MAXINSTALLED = strToInt(setDefaults(strconv.Itoa(Config.INSTALL.MAXINSTALLED), "9", "MAXINSTALLED"))
+	Config.INSTALL.PGCONFDIRECTORY = endWithSlash(setDefaults(Config.INSTALL.PGCONFDIRECTORY, "/home/gpadmin/", "PGCONF_DIRECTORY"))                       // Max number of installed GP instances        // Fail if these parameter is missing
+	Config.INSTALL.ENVSCRIPT = setDefaults(Config.INSTALL.ENVSCRIPT, "gpenv", "ENV_SCRIPT")
 
 	// Fail if these parameter is missing
 	Config.CORE.OS = isMissing(Config.CORE.OS, "OS")                 // Go build OS
