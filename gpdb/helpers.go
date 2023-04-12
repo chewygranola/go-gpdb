@@ -316,6 +316,12 @@ func strToInt(s string) int {
 	return i
 }
 
+// string to bool
+func strToBool(s string) bool {
+       b, _ := strconv.ParseBool(s)
+       return b
+}
+
 // Extract the version
 func extractVersion(version string) float64 {
 	var f float64

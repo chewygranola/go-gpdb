@@ -2,7 +2,7 @@ package main
 
 var (
 	programName    = "gpdb"
-	programVersion = "3.5.2"
+	programVersion = "3.6"
 )
 
 func main() {
