@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"regexp"
 )
 
 // Global Parameter
@@ -16,6 +17,7 @@ var (
 type Command struct {
 	Product   string
 	Version   string
+	Username  string
 	CCVersion string
 	Debug     bool
 	Install   bool
