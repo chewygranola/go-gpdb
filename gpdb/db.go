@@ -89,7 +89,7 @@ func startDBifNotStarted(envFile string) {
 
 		Warnf("Database is not started, attempting to start the database...")
 		// Stop all database is not stopped unless asked not to stop it
-		if !cmdOptions.Stop {
+		if !cmdOptions.Stop && !Config.CORE.DATALABS {
 			stopAllDb()
 		}
 
