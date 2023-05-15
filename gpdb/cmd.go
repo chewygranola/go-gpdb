@@ -93,6 +93,11 @@ var installCmd = &cobra.Command{
 		if !isValidVersionFormat(cmdOptions.Version) {
 			Fatalf("Unexpected version number. Expected format X.Y.Z. E.g. 4.3.30, 5.16.0, 4.3.30.1")
 		}
+		
+    //clean up username
+		var nonAlphanumericRegex = regexp.MustCompile(`[^a-zA-Z0-9 ]+`)
+		cmdOptions.Username = nonAlphanumericRegex.ReplaceAllString(cmdOptions.Username, "")
+		
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 		// Install the product that is downloaded
@@ -106,6 +111,12 @@ func installFlags() {
 	installCmd.Flags().StringVarP(&cmdOptions.Version, "version", "v", "", "OPTIONAL: Which GPDB version software do you want to install?")
 	installCmd.Flags().StringVarP(&cmdOptions.CCVersion, "ccversion", "c", "", "What is the version of GPCC that you can to install (for only -p gpcc)?")
 	installCmd.Flags().BoolVar(&cmdOptions.Standby, "standby", false, "OPTIONAL: Install standby if the standby host is available")
+	
+	installCmd.Flags().StringVarP(&cmdOptions.Username, "username", "u", "", "What is your PivotalID, this will be used to name your enviromental file?")
+      
+	if Config.CORE.DATALABS {
+	  installCmd.MarkFlagRequired("username")
+	}
 }
 
 // Sub Command: Remove
