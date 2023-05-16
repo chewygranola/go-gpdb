@@ -12,6 +12,12 @@ func (i *Installation) buildGpInitSystem() {
 	// Set the values of the below parameters
 	i.GPInitSystem.ArrayName = "gp_" + cmdOptions.Version + "_" + i.Timestamp
 	i.GPInitSystem.SegPrefix = "gp_" + cmdOptions.Version + "_" + i.Timestamp
+	
+	if cmdOptions.Username != "" {
+	  i.GPInitSystem.ArrayName = i.GPInitSystem.ArrayName + "_" + cmdOptions.Username
+	  i.GPInitSystem.SegPrefix = i.GPInitSystem.SegPrefix + "_" + cmdOptions.Username
+	}
+	
 	i.GPInitSystem.DBName = "gpadmin"
 	i.GPInitSystem.MasterDir = strings.TrimSuffix(Config.INSTALL.MASTERDATADIRECTORY, "/")
 	i.GPInitSystem.SegmentDir = strings.TrimSuffix(Config.INSTALL.SEGMENTDATADIRECTORY, "/")
