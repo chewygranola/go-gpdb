@@ -340,9 +340,9 @@ func isValidVersionFormat(version string) bool {
 
 // Extract the version from the name
 func extractVersionNumber(filename string) string {
-	r, _ := regexp.Compile(`(-[0-9]+.[0-9]+.[0-9]+-|-[0-9]+.[0-9]+.[0-9]+.[0-9]+-)`)
+	r, _ := regexp.Compile(`-(\d+.\d+.\d+(-beta)?.\d+|\d+.\d+.\d+)-`)
 	version := r.FindString(filename)
-	return strings.Replace(version, "-", "", -1)
+	return strings.Trim(version, "-")
 }
 
 // Size in MB

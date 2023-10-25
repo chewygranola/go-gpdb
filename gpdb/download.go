@@ -327,8 +327,8 @@ func getSystemInfoAndCheckFamily() string {
 	  }
 	  return "Ubuntu"
 	}
-	
-	OsName = strings.Contains(OsnameLower, "rocky linux 8")
+	// CentOS Stream 8
+	OsName = (strings.Contains(OsnameLower, "rocky linux 8") || strings.Contains(OsnameLower, "centos stream 8"))
 	if OsName {
 	  return "RHEL 8"
 	}
