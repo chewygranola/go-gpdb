@@ -13,7 +13,7 @@ import (
 //GPDB v6 CentOS 7 dependencies from Docs
 var dependencies_legacy = []string{"apr-util", "bash", "bzip2", "curl", "libcurl", "libevent", "libxml2",
 	"libyaml", "zlib", "openldap", "openssh", "openssl", "openssl-libs", "perl", "readline", "rsync", "R",
-	"sed", "tar", "zip", "krb5-devel"}
+	"sed", "tar", "zip", "krb5-devel", "libcgroup-tools"}
 
 
 var gpdb_7_beta_dependencies = []string{"libevent", "libyaml", "net-tools", "perl", "rsync", "sos", "tree", 
